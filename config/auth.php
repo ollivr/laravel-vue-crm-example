@@ -42,9 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
-            'hash' => false,
         ],
     ],
 
@@ -68,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
@@ -114,4 +113,7 @@ return [
 
     'password_timeout' => 10800,
 
+    'passport_grant_client_id' => env('PASSPORT_GRAND_CLIENT_ID', 2),
+
+    'passport_client_secret' => env('PASSPORT_SECRET', 2)
 ];

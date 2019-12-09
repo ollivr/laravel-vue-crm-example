@@ -76,3 +76,78 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Project Installation
+
+1 Clone project:
+
+`git clone https://github.com/ThisIsSpartaX/laravel-vue-crm-example.git .`
+
+2 Copy .env.example to .env  
+
+`cp .env.example .env`
+
+3 Generate APP key
+
+`php artisan key:generate  `
+
+4 Create Database
+
+5 Set database credentials in .env file
+
+6 Install vendors:  
+
+`composer install `
+
+7 Create storage simlink
+
+`php artisan storage:link`
+
+8 Create tables:
+
+`php artisan migrate`
+
+9 Fill database 
+
+`php artisan db:seed`
+
+10 Create oAutch clients:
+
+`php artisan passport:install`
+
+11 Set OAuth client id 2 in .env file 
+
+`PASSWORD_GRAND_CLIENT_ID=2`
+
+12 Copy OAuth secret from client 2 from oauth_clients DB table to .env file
+ 
+`PASSPORT_SECRET=`
+
+13 Install NPM
+
+`npm install`
+
+14 Compile JavaScript and SCSS
+
+`npm run development` or `npm run production` 
+
+or watch in development mode
+
+`npm run watch`
+
+15 Create testing env file
+
+`cp .env.example .env.testing`
+
+16 Fill DB credentials in .env.testing
+
+17 Set OAuth client id 2 in .env.testing file 
+
+`PASSWORD_GRAND_CLIENT_ID=2 `
+
+_(PASSPORT_SECRET  in .env testing not needed)_
+
+18 Start tests:
+
+`./vendor/bin/phpunit tests/Unit`

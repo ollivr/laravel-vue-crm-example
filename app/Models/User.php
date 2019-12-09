@@ -1,13 +1,26 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
+use Laravel\Passport\HasApiTokens;
 
+/**
+ * Class User
+ * @property-read $id
+ * @param string $name
+ * @param string $email
+ * @param string $password
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
+    use HasApiTokens;
+    use HasRoleAndPermission;
     use Notifiable;
 
     /**
@@ -25,7 +38,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pivot'
     ];
 
     /**
@@ -36,4 +49,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getTableName()
+    {
+        return with(new static)->getTable();
+    }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, DepartmentUser::getTableName(), 'user_id', 'department_id');
+    }
 }
